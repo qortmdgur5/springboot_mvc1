@@ -7,6 +7,7 @@ import hello.servlet.web.frontcontroller.v3.controller.MemberListControllerV3;
 import hello.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
 import hello.servlet.web.frontcontroller.v5.adapter.ControllerV3HandlerAdapter;
 import hello.servlet.web.frontcontroller.v5.adapter.ControllerV4HandlerAdapter;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         initHandlerMappingMap();
         initHandlerAdapters();
     }
+
 
 
 
@@ -71,6 +73,11 @@ public class FrontControllerServletV5 extends HttpServlet {
     private Object getHandler(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         return handlerMappingMap.get(requestURI);
+    }
+
+    @Override
+    protected long getLastModified(HttpServletRequest req) {
+        return super.getLastModified(req);
     }
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
